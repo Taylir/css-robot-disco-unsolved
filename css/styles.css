@@ -2,40 +2,269 @@ body {
   background-color: #21222c;
 }
 
-/* 👇👇👇 Paste the styles of your Fancy Robot from the "Position it right" assignment here 👇👇👇 */
-
 .robot-container {
+  width: 300px;
+  height: 400px;
+  margin: 200px auto;
+  position: relative;
 }
 
 .robot-face-shape {
+  width: 200px;
+  height: 250px;
+  background-image: linear-gradient(130deg,
+      #4682b4 40%,
+      silver 50%,
+      #4682e4 60%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px ridge blue;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px #888888;
+  overflow: hidden;
+}
+
+.robot-eye-left,
+.robot-eye-right {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid red;
+  position: relative;
+  transform: rotate(90deg);
+  animation: eyeChange 2s alternate infinite;
+}
+
+@keyframes eyeChange {
+  to {
+    border: 3px solid black;
+    border-radius: 50%;
+    background-color: white;
+  }
+}
+
+.robot-eye-left:after,
+.robot-eye-right:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 50px solid red;
+  position: absolute;
+  top: 30px;
+  left: -50px;
+  animation: followEye 3s alternate infinite;
+}
+
+@keyframes followEye {
+  to {
+    border: 3px solid white;
+    border-radius: 50%;
+    background-color: white;
+  }
 }
 
 .robot-eye-left {
+  top: 55px;
+  left: 30px;
 }
 
 .robot-eye-right {
+  top: 0;
+  right: -150px;
+}
+
+.robot-ear-left,
+.robot-ear-right {
+  width: 50px;
+  height: 25px;
+  border: 9px solid silver;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: 120px;
+  z-index: -1;
 }
 
 .robot-ear-left {
+  left: 15px;
+  transform: rotate(270deg);
+  animation: earPop 1s alternate infinite;
+}
+
+@keyframes earPop {
+  to {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
 }
 
 .robot-ear-right {
+  right: 15px;
+  transform: rotate(90deg);
+  animation: glideEar 3s linear infinite;
+}
+
+@keyframes glideEar {
+  10% {
+    transform: translateY(207px) rotate(60deg);
+  }
+
+  30% {
+    transform: translate(-199px, 207px) rotate(100deg);
+  }
+
+  50% {
+    transform: translate(-230px, -60px) rotate(190deg);
+  }
+
+  70% {
+    transform: translate(0, -60px) rotate(270deg);
+  }
+
+  80% {
+    transform: translateY(-60px) rotate(0deg);
+  }
+
+  85% {
+    transform: translate(0, 0) rotate(90deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(90deg);
+  }
 }
 
 .robot-nose {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  width: 0px;
+  height: 0px;
+  border-bottom: 30px solid transparent;
+  border-top: 30px solid rgba(0, 0, 255, 0.3);
+  border-left: 30px solid rgba(0, 255, 0, 0.4);
+  border-right: 30px solid rgba(255, 0, 0, 1);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  animation: simonNose 4s linear infinite;
 }
 
-.robot-nose:before {
-}
+@keyframes simonNose {
+  25% {
+    border-right: 30px solid transparent;
+    border-left: 30px solid rgba(0, 0, 255, 0.4);
+    border-top: 30px solid rgba(0, 255, 0, 0.6);
+    border-bottom: 30px solid rgba(255, 0, 0, 0.3);
+  }
 
-.robot-nose:after {
+  50% {
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid rgba(0, 0, 255, 0.3);
+    border-right: 30px solid rgba(0, 255, 0, 1);
+    border-left: 30px solid rgba(255, 0, 0, 0.4);
+  }
+
+  75% {
+    border-left: 30px solid transparent;
+    border-right: 30px solid rgba(0, 0, 255, 1);
+    border-bottom: 30px solid rgba(0, 255, 0, 0.3);
+    border-top: 30px solid rgba(255, 0, 0, 0.6);
+  }
 }
 
 .robot-teeth {
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 25%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.robot-tooth:nth-of-type(even) {
+  border-bottom: 10px solid #242424;
+  transform: translatex(-20px) rotate(180deg);
+  animation: grindTop 100ms alternate infinite;
+}
+
+@keyframes grindTop {
+  to {
+    transform: translateX(20px) rotate(180deg);
+  }
 }
 
 .robot-tooth {
+  border-bottom: 10px solid #a40002;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  animation: grindBottom 50ms alternate infinite;
 }
 
+@keyframes grindBottom {
+  to {
+    transform: translateX(20px);
+  }
+}
+
+.robot-tooth-special {
+  align-self: end;
+  background-image: url("https://picsum.photos/200/300");
+  background-size: cover;
+  background-position: center;
+  height: 40px;
+  width: 20px;
+  border-radius: 50%;
+  border-bottom: 20px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  transition: all 100s ease-in-out;
+  z-index: -2;
+}
+
+.robot-tooth-special:hover {
+  transform: scale(1000);
+}
+
+/*Pompadora hair?*/
 .robot-hair-style {
+  width: 80%;
+  height: 40px;
+  position: absolute;
+  top: 50px;
+  left: 10%;
+  display: flex;
+  justify-content: space-around;
+  transform-origin: bottom right;
+  animation: hairBounce alternate 100ms infinite;
+}
+
+.robot-hair-one::before,
+.robot-hair-two::before,
+.robot-hair-three::before {
+  content: "$";
+  font-size: 6em;
+  color: green;
+}
+
+.robot-hair-one,
+.robot-hair-two,
+.robot-hair-three {
+  width: 20px;
+  height: 40px;
+  position: relative;
+  transform: rotate(90deg);
+}
+
+@keyframes hairBounce {
+  to {
+    transform: rotate(15deg);
+  }
 }
